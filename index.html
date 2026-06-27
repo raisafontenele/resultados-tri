@@ -170,14 +170,16 @@ const BANK_CONFIG = {
     cor: "var(--accent-bradesco)",
     hex: "#cc0000",
     kpis: [
-      { key: "lucro_bi",         label: "Lucro",          fmt: v => `R$${v}bi`  },
-      { key: "roae_pct",         label: "ROAE",           fmt: v => `${v}%`     },
-      { key: "receitas_bi",      label: "Receitas",       fmt: v => `R$${v}bi`  },
-      { key: "carteira_mpme_bi", label: "Carteira MPME",  fmt: v => `R$${v}bi`  },
-      { key: "npl_mpme_pct",     label: "NPL MPME",       fmt: v => `${v}%`     },
-      { key: "eficiencia_pct",   label: "Eficiência",     fmt: v => `${v}%`     },
-      { key: "depositos_bi",     label: "Depósitos",      fmt: v => `R$${v}bi`  },
-      { key: "clientes_total_mm",label: "Clientes",       fmt: v => `${v}MM`    },
+      { key: "lucro_bi",          label: "Lucro",           fmt: v => `R$${(+v).toFixed(1)}bi`, lowerBetter: false },
+      { key: "roae_pct",          label: "ROAE",            fmt: v => `${v}%`,                  lowerBetter: false },
+      { key: "receitas_bi",       label: "Receitas",        fmt: v => `R$${(+v).toFixed(1)}bi`, lowerBetter: false },
+      { key: "carteira_mpme_bi",  label: "Carteira MPME",   fmt: v => `R$${(+v).toFixed(1)}bi`, lowerBetter: false },
+      { key: "npl_mpme_90_pct",   label: "NPL MPME 90",     fmt: v => `${v}%`,                  lowerBetter: true  },
+      { key: "npl_mpme_15_pct",   label: "NPL MPME 15",     fmt: v => `${v}%`,                  lowerBetter: true  },
+      { key: "eficiencia_pct",    label: "Eficiência",      fmt: v => `${v}%`,                  lowerBetter: true  },
+      { key: "depositos_bi",      label: "Depósitos",       fmt: v => `R$${(+v).toFixed(1)}bi`, lowerBetter: false },
+      { key: "clientes_total_mm", label: "Clientes Total",  fmt: v => `${v}MM`,                 lowerBetter: false },
+      { key: "clientes_pme_mil",  label: "Clientes PME",    fmt: v => `${v}k`,                  lowerBetter: false },
     ]
   }
 };
@@ -205,10 +207,10 @@ function fmt(bank, key, val) {
   return kDef ? kDef.fmt(val) : val;
 }
 function deltaClass(val, key) {
-  // for NPL and eficiencia: lower is better
-  const lowerBetter = ["npl_mpme_pct","npl_pj_90_pct","npl_90_pct","eficiencia_pct"];
   if (val == null) return "neutral";
-  const better = lowerBetter.includes(key) ? val < 0 : val > 0;
+  const kDef = BANK_CONFIG[currentBank]?.kpis.find(k => k.key === key);
+  const lb = kDef ? kDef.lowerBetter : ["npl_mpme_90_pct","npl_mpme_15_pct","eficiencia_pct"].includes(key);
+  const better = lb ? val < 0 : val > 0;
   return better ? "up" : val === 0 ? "neutral" : "down";
 }
 function pctDelta(curr, prev, decimals=1) {
@@ -258,8 +260,9 @@ function renderTrimestre() {
 
   if (!cur) { document.getElementById("trimestre-content").innerHTML = '<div class="empty-state">Sem dados disponíveis.</div>'; return; }
 
-  // build KPI cards (max 4 for 2x2 grid)
-  const kpisToShow = cfg.kpis.filter(k => cur.kpis[k.key] != null).slice(0, 4);
+  // KPIs prioritários sempre visíveis no topo (se tiverem valor)
+  const PRIORITY_KEYS = ["lucro_bi","roae_pct","carteira_mpme_bi","npl_mpme_90_pct","npl_mpme_15_pct","eficiencia_pct"];
+  const kpisToShow = cfg.kpis.filter(k => PRIORITY_KEYS.includes(k.key) && cur.kpis[k.key] != null);
   const kpiCardsHTML = kpisToShow.map(k => {
     const val  = cur.kpis[k.key];
     const pval = prev?.kpis[k.key];
@@ -405,8 +408,7 @@ function renderEvolucao() {
 // ── ABA ESTRATÉGIA ────────────────────────────────────────
 const CAT_LABELS = {
   todos: "Todos", liderança: "Liderança", produto: "Produto",
-  atendimento: "Atendimento", segmentação: "Segmentação",
-  tecnologia: "Tecnologia", parceria: "Parceria",
+  atendimento: "Atendimento", tecnologia: "Tecnologia", parceria: "Parceria",
   precificação: "Preço", cross_sell: "Cross-sell", regulatório: "Regulatório"
 };
 

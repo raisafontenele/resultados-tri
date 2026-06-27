@@ -5,7 +5,7 @@ window.TIMELINE_DATA = [
   {
     banco_id: "bradesco",
     data: "2022-Q1",
-    categoria: "segmentação",
+    categoria: "atendimento",
     titulo: "Estrutura dedicada: 150 agências Empresas & Negócios",
     descricao: "Bradesco cria segmento exclusivo para PMEs com faturamento de R$ 3M a R$ 50M/ano, com gerentes de relacionamento dedicados e nova estrutura de atendimento. Base para o crescimento de MS em SME que se aceleraria a partir de 2023.",
     impacto_pme: "alto",
@@ -59,7 +59,7 @@ window.TIMELINE_DATA = [
   {
     banco_id: "bradesco",
     data: "2025-Q1",
-    categoria: "segmentação",
+    categoria: "atendimento",
     titulo: "Lançamento Bradesco Principal (segmento afluente)",
     descricao: "Novo segmento entre Prime e Varejo para clientes com renda/patrimônio intermediários. Modelo de escritórios dedicados com proposta de valor diferenciada. Chega a 300k+ clientes em Dez/25 com 62 escritórios em 38 cidades.",
     impacto_pme: "baixo",
