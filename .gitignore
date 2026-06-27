@@ -1,0 +1,9 @@
+# PDFs e apresentações — não sobem para o GitHub
+*.pdf
+*.pptx
+*.potx
+*.dotx
+*.xlsx
+
+# pasta de config local do Claude
+.claude/
