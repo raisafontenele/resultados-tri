@@ -1,97 +1,236 @@
-// quarters.js — dados quantitativos trimestrais
-// Fonte primária: Informativos Trimestrais Bradesco (PDFs lidos)
+// quarters.js — dados quantitativos trimestrais Bradesco
+// Fontes: Apresentações de Resultados e Informativos Trimestrais (PDFs lidos)
 // Campos null = não divulgados / não lidos ainda
+// npl_mpme_15_pct = inadimplência MPME 15 a 90 dias (nota de rodapé nas Apresentações de Resultados)
+// npl_mpme_90_pct = inadimplência MPME acima de 90 dias (gráfico principal)
 
 window.QUARTERS_DATA = [
 
-  // ── HISTÓRICO 2022 (estrutura — dados a preencher) ──────────
-  { banco_id:"bradesco", periodo:"1T22", ano:2022, tri:1,
-    kpis:{ clientes_pme_mil:null, clientes_total_mm:null, carteira_mpme_bi:null,
-           npl_mpme_90_pct:null, npl_mpme_15_pct:null, tpv_cartoes_bi:null,
-           receitas_bi:null, lucro_bi:null, roae_pct:null,
-           eficiencia_pct:null, depositos_bi:null, agencias_emp_neg:null },
-    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:"" },
+  // ── 2022 ──────────────────────────────────────────────────────────────────
+  {
+    banco_id:"bradesco", periodo:"1T22", ano:2022, tri:1,
+    kpis:{
+      clientes_pme_mil:    null,
+      clientes_total_mm:   74.8,         // Informativo 1T22
+      carteira_mpme_bi:    null,
+      npl_mpme_90_pct:     null,
+      npl_mpme_15_pct:     null,
+      tpv_cartoes_bi:      null,
+      receitas_bi:         null,
+      lucro_bi:            6.821,        // Informativo 1T22
+      roae_pct:            18.0,         // ROAE acumulado 12M (Informativo 1T22)
+      eficiencia_pct:      45.6,         // IEO acumulado 12M (Informativo 1T22)
+      depositos_bi:        null,
+      agencias_emp_neg:    null
+    },
+    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:""
+  },
+  {
+    banco_id:"bradesco", periodo:"2T22", ano:2022, tri:2,
+    kpis:{
+      clientes_pme_mil:    null,
+      clientes_total_mm:   75.5,         // Informativo 2T22
+      carteira_mpme_bi:    null,
+      npl_mpme_90_pct:     null,
+      npl_mpme_15_pct:     null,
+      tpv_cartoes_bi:      null,
+      receitas_bi:         null,
+      lucro_bi:            7.041,        // Informativo 2T22
+      roae_pct:            null,
+      eficiencia_pct:      null,
+      depositos_bi:        null,
+      agencias_emp_neg:    null
+    },
+    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:""
+  },
+  {
+    banco_id:"bradesco", periodo:"3T22", ano:2022, tri:3,
+    kpis:{
+      clientes_pme_mil:    null,
+      clientes_total_mm:   76.8,         // Informativo 3T22
+      carteira_mpme_bi:    null,
+      npl_mpme_90_pct:     null,
+      npl_mpme_15_pct:     null,
+      tpv_cartoes_bi:      null,
+      receitas_bi:         null,
+      lucro_bi:            5.223,        // Informativo 3T22
+      roae_pct:            null,
+      eficiencia_pct:      null,
+      depositos_bi:        null,
+      agencias_emp_neg:    null
+    },
+    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:""
+  },
+  {
+    banco_id:"bradesco", periodo:"4T22", ano:2022, tri:4,
+    kpis:{
+      clientes_pme_mil:    null,
+      clientes_total_mm:   77.1,         // Informativo 4T22
+      carteira_mpme_bi:    null,
+      npl_mpme_90_pct:     4.3,          // Apresentação 4T23 p.4 (Dez22)
+      npl_mpme_15_pct:     null,
+      tpv_cartoes_bi:      null,
+      receitas_bi:         null,
+      lucro_bi:            1.595,        // Informativo 4T22 (provisões pontuais)
+      roae_pct:            null,
+      eficiencia_pct:      null,
+      depositos_bi:        null,
+      agencias_emp_neg:    null
+    },
+    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:""
+  },
 
-  { banco_id:"bradesco", periodo:"2T22", ano:2022, tri:2,
-    kpis:{ clientes_pme_mil:null, clientes_total_mm:null, carteira_mpme_bi:null,
-           npl_mpme_90_pct:null, npl_mpme_15_pct:null, tpv_cartoes_bi:null,
-           receitas_bi:null, lucro_bi:null, roae_pct:null,
-           eficiencia_pct:null, depositos_bi:null, agencias_emp_neg:null },
-    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:"" },
+  // ── 2023 ──────────────────────────────────────────────────────────────────
+  {
+    banco_id:"bradesco", periodo:"1T23", ano:2023, tri:1,
+    kpis:{
+      clientes_pme_mil:    null,
+      clientes_total_mm:   76.7,         // Informativo 1T23
+      carteira_mpme_bi:    174.1,        // Informativo 1T23
+      npl_mpme_90_pct:     5.1,          // Apresentação 4T23 p.4 (Mar23)
+      npl_mpme_15_pct:     null,
+      tpv_cartoes_bi:      null,
+      receitas_bi:         null,
+      lucro_bi:            4.28,         // Informativo 1T23
+      roae_pct:            10.6,         // Informativo 1T23
+      eficiencia_pct:      null,
+      depositos_bi:        null,
+      agencias_emp_neg:    null
+    },
+    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:""
+  },
+  {
+    banco_id:"bradesco", periodo:"2T23", ano:2023, tri:2,
+    kpis:{
+      clientes_pme_mil:    null,
+      clientes_total_mm:   72.0,         // Informativo 2T23
+      carteira_mpme_bi:    167.7,        // Informativo 2T23
+      npl_mpme_90_pct:     5.7,          // Apresentação 4T23 p.4 (Jun23)
+      npl_mpme_15_pct:     null,
+      tpv_cartoes_bi:      null,
+      receitas_bi:         null,
+      lucro_bi:            4.518,        // Informativo 2T23
+      roae_pct:            11.1,         // Informativo 2T23
+      eficiencia_pct:      null,
+      depositos_bi:        null,
+      agencias_emp_neg:    null
+    },
+    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:""
+  },
+  {
+    banco_id:"bradesco", periodo:"3T23", ano:2023, tri:3,
+    kpis:{
+      clientes_pme_mil:    null,
+      clientes_total_mm:   71.7,         // Informativo 3T23
+      carteira_mpme_bi:    165.0,        // Informativo 3T23
+      npl_mpme_90_pct:     5.6,          // Apresentação 4T23 p.4 (Set23)
+      npl_mpme_15_pct:     null,
+      tpv_cartoes_bi:      null,
+      receitas_bi:         null,
+      lucro_bi:            4.621,        // Informativo 3T23
+      roae_pct:            11.3,         // Informativo 3T23
+      eficiencia_pct:      null,
+      depositos_bi:        null,
+      agencias_emp_neg:    null
+    },
+    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:""
+  },
+  {
+    banco_id:"bradesco", periodo:"4T23", ano:2023, tri:4,
+    kpis:{
+      clientes_pme_mil:    1700,         // Plano Estratégico 4T23: "1,7MM clientes SME"
+      clientes_total_mm:   71.1,         // Informativo 4T23
+      carteira_mpme_bi:    167.6,        // Informativo 4T23
+      npl_mpme_90_pct:     5.1,          // Apresentação 4T23 p.4 (Dez23)
+      npl_mpme_15_pct:     null,
+      tpv_cartoes_bi:      null,
+      receitas_bi:         null,
+      lucro_bi:            2.878,        // Apresentação 4T23 (com reforço de PDD)
+      roae_pct:            10.0,         // Apresentação 4T23 (ROAE acumulado)
+      eficiencia_pct:      null,
+      depositos_bi:        null,
+      agencias_emp_neg:    null
+    },
+    highlights:[], guidance:"Carteira 7–11%; MF 3–7%; Serviços 2–6%; Despesas 5–9%; Seguros 4–8%",
+    percepcao_mercado:"", mudancas_atendimento:""
+  },
 
-  { banco_id:"bradesco", periodo:"3T22", ano:2022, tri:3,
-    kpis:{ clientes_pme_mil:null, clientes_total_mm:null, carteira_mpme_bi:null,
-           npl_mpme_90_pct:null, npl_mpme_15_pct:null, tpv_cartoes_bi:null,
-           receitas_bi:null, lucro_bi:null, roae_pct:null,
-           eficiencia_pct:null, depositos_bi:null, agencias_emp_neg:null },
-    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:"" },
+  // ── 2024 ──────────────────────────────────────────────────────────────────
+  {
+    banco_id:"bradesco", periodo:"1T24", ano:2024, tri:1,
+    kpis:{
+      clientes_pme_mil:    null,
+      clientes_total_mm:   71.0,         // Informativo 1T24
+      carteira_mpme_bi:    null,
+      npl_mpme_90_pct:     5.2,          // Apresentação 1T25 p.6 (Mar24)
+      npl_mpme_15_pct:     4.1,          // Apresentação 1T25 p.6 nota (1): "4,1% em Mar24"
+      tpv_cartoes_bi:      null,
+      receitas_bi:         28.1,         // Apresentação 1T26 p.3 (chart histórico)
+      lucro_bi:            4.20,         // Informativo 1T24
+      roae_pct:            10.2,         // Informativo 1T24
+      eficiencia_pct:      null,
+      depositos_bi:        null,
+      agencias_emp_neg:    null
+    },
+    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:""
+  },
+  {
+    banco_id:"bradesco", periodo:"2T24", ano:2024, tri:2,
+    kpis:{
+      clientes_pme_mil:    null,
+      clientes_total_mm:   null,
+      carteira_mpme_bi:    null,
+      npl_mpme_90_pct:     5.1,          // Apresentação 1T25 p.6 (Jun24)
+      npl_mpme_15_pct:     null,
+      tpv_cartoes_bi:      null,
+      receitas_bi:         29.7,         // Apresentação 1T26 p.3 (chart histórico)
+      lucro_bi:            4.70,         // Informativo 2T24
+      roae_pct:            11.4,         // Informativo 2T24
+      eficiencia_pct:      null,
+      depositos_bi:        null,
+      agencias_emp_neg:    null
+    },
+    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:""
+  },
+  {
+    banco_id:"bradesco", periodo:"3T24", ano:2024, tri:3,
+    kpis:{
+      clientes_pme_mil:    null,
+      clientes_total_mm:   null,
+      carteira_mpme_bi:    null,
+      npl_mpme_90_pct:     4.4,          // Apresentação 1T25 p.6 (Set24)
+      npl_mpme_15_pct:     null,
+      tpv_cartoes_bi:      null,
+      receitas_bi:         31.1,         // Apresentação 1T26 p.3
+      lucro_bi:            5.20,         // Informativo 3T24
+      roae_pct:            12.4,         // Informativo 3T24
+      eficiencia_pct:      null,
+      depositos_bi:        null,
+      agencias_emp_neg:    null
+    },
+    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:""
+  },
+  {
+    banco_id:"bradesco", periodo:"4T24", ano:2024, tri:4,
+    kpis:{
+      clientes_pme_mil:    null,
+      clientes_total_mm:   null,
+      carteira_mpme_bi:    null,
+      npl_mpme_90_pct:     4.0,          // Apresentação 1T25 p.6 (Dez24)
+      npl_mpme_15_pct:     3.4,          // Apresentação 1T25 p.6 nota (1): "3,4% em Dez24"
+      tpv_cartoes_bi:      null,
+      receitas_bi:         32.9,         // Apresentação 1T26 p.3
+      lucro_bi:            5.40,         // Informativo 4T24
+      roae_pct:            12.7,         // Informativo 4T24
+      eficiencia_pct:      null,
+      depositos_bi:        null,
+      agencias_emp_neg:    null
+    },
+    highlights:[], guidance:"Crédito 8,5–10,5%; Serviços 3–5%; Despesas 6–8%; Seguros 6–8%",
+    percepcao_mercado:"", mudancas_atendimento:""
+  },
 
-  { banco_id:"bradesco", periodo:"4T22", ano:2022, tri:4,
-    kpis:{ clientes_pme_mil:null, clientes_total_mm:null, carteira_mpme_bi:null,
-           npl_mpme_90_pct:null, npl_mpme_15_pct:null, tpv_cartoes_bi:null,
-           receitas_bi:null, lucro_bi:null, roae_pct:null,
-           eficiencia_pct:null, depositos_bi:null, agencias_emp_neg:null },
-    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:"" },
-
-  // ── HISTÓRICO 2023 (estrutura — dados a preencher) ──────────
-  { banco_id:"bradesco", periodo:"1T23", ano:2023, tri:1,
-    kpis:{ clientes_pme_mil:null, clientes_total_mm:null, carteira_mpme_bi:null,
-           npl_mpme_90_pct:null, npl_mpme_15_pct:null, tpv_cartoes_bi:null,
-           receitas_bi:null, lucro_bi:null, roae_pct:null,
-           eficiencia_pct:null, depositos_bi:null, agencias_emp_neg:null },
-    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:"" },
-
-  { banco_id:"bradesco", periodo:"2T23", ano:2023, tri:2,
-    kpis:{ clientes_pme_mil:null, clientes_total_mm:null, carteira_mpme_bi:null,
-           npl_mpme_90_pct:null, npl_mpme_15_pct:null, tpv_cartoes_bi:null,
-           receitas_bi:null, lucro_bi:null, roae_pct:null,
-           eficiencia_pct:null, depositos_bi:null, agencias_emp_neg:null },
-    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:"" },
-
-  { banco_id:"bradesco", periodo:"3T23", ano:2023, tri:3,
-    kpis:{ clientes_pme_mil:null, clientes_total_mm:null, carteira_mpme_bi:null,
-           npl_mpme_90_pct:null, npl_mpme_15_pct:null, tpv_cartoes_bi:null,
-           receitas_bi:null, lucro_bi:null, roae_pct:null,
-           eficiencia_pct:null, depositos_bi:null, agencias_emp_neg:null },
-    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:"" },
-
-  { banco_id:"bradesco", periodo:"4T23", ano:2023, tri:4,
-    kpis:{ clientes_pme_mil:null, clientes_total_mm:null, carteira_mpme_bi:null,
-           npl_mpme_90_pct:null, npl_mpme_15_pct:null, tpv_cartoes_bi:null,
-           receitas_bi:null, lucro_bi:null, roae_pct:null,
-           eficiencia_pct:null, depositos_bi:null, agencias_emp_neg:null },
-    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:"" },
-
-  // ── HISTÓRICO 2024 (estrutura — dados a preencher) ──────────
-  { banco_id:"bradesco", periodo:"1T24", ano:2024, tri:1,
-    kpis:{ clientes_pme_mil:null, clientes_total_mm:null, carteira_mpme_bi:null,
-           npl_mpme_90_pct:null, npl_mpme_15_pct:null, tpv_cartoes_bi:null,
-           receitas_bi:null, lucro_bi:null, roae_pct:null,
-           eficiencia_pct:null, depositos_bi:null, agencias_emp_neg:null },
-    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:"" },
-
-  { banco_id:"bradesco", periodo:"2T24", ano:2024, tri:2,
-    kpis:{ clientes_pme_mil:null, clientes_total_mm:null, carteira_mpme_bi:null,
-           npl_mpme_90_pct:null, npl_mpme_15_pct:null, tpv_cartoes_bi:null,
-           receitas_bi:null, lucro_bi:null, roae_pct:null,
-           eficiencia_pct:null, depositos_bi:null, agencias_emp_neg:null },
-    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:"" },
-
-  { banco_id:"bradesco", periodo:"3T24", ano:2024, tri:3,
-    kpis:{ clientes_pme_mil:null, clientes_total_mm:null, carteira_mpme_bi:null,
-           npl_mpme_90_pct:null, npl_mpme_15_pct:null, tpv_cartoes_bi:null,
-           receitas_bi:null, lucro_bi:null, roae_pct:null,
-           eficiencia_pct:null, depositos_bi:null, agencias_emp_neg:null },
-    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:"" },
-
-  { banco_id:"bradesco", periodo:"4T24", ano:2024, tri:4,
-    kpis:{ clientes_pme_mil:null, clientes_total_mm:null, carteira_mpme_bi:null,
-           npl_mpme_90_pct:null, npl_mpme_15_pct:null, tpv_cartoes_bi:null,
-           receitas_bi:null, lucro_bi:null, roae_pct:null,
-           eficiencia_pct:null, depositos_bi:null, agencias_emp_neg:null },
-    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:"" },
-
-  // ── 2025 — lidos dos PDFs ───────────────────────────────────
+  // ── 2025 — lidos dos PDFs ─────────────────────────────────────────────────
   {
     banco_id: "bradesco",
     periodo: "1T25",
@@ -99,14 +238,14 @@ window.QUARTERS_DATA = [
     kpis: {
       clientes_pme_mil:    null,
       clientes_total_mm:   null,
-      carteira_mpme_bi:    222.6,        // estimado: 254.6 / 1.144 (YoY +14.4% declarado no 1T26)
-      npl_mpme_90_pct:     4.3,          // gráfico NPL 1T25 PDF (Mar25 MPME)
-      npl_mpme_15_pct:     null,
+      carteira_mpme_bi:    222.5,        // Apresentação 1T25 p.4 (confirmado)
+      npl_mpme_90_pct:     4.1,          // Apresentação 1T25 e 1T26 p.6 (Mar25)
+      npl_mpme_15_pct:     3.4,          // Apresentação 1T25 p.6 nota (1): "3,4% em Mar25"
       tpv_cartoes_bi:      null,
-      receitas_bi:         32.3,
+      receitas_bi:         32.4,         // Apresentação 1T26 p.3 (chart histórico)
       lucro_bi:            5.86,
       roae_pct:            14.4,
-      eficiencia_pct:      50.0,         // aprox: IEO ~50% mencionado no plano de transformação
+      eficiencia_pct:      49.7,         // Apresentação 1T25 p.8: IEO trimestral
       depositos_bi:        null,
       agencias_emp_neg:    150
     },
@@ -115,10 +254,10 @@ window.QUARTERS_DATA = [
       "Carteira de crédito expandida supera R$ 1 trilhão pela 1ª vez",
       "150 novas agências Empresas & Negócios abertas em 2024",
       "Bradesco Principal lançado com ~50 mil clientes",
-      "MPME crescendo 16,2% YoY; NPL MPME caindo 90bps a/a",
+      "MPME crescendo +29,6% YoY; NPL MPME 90 caindo 110bps a/a",
       "1.400 pessoas internalizadas em tecnologia no trimestre"
     ],
-    guidance: "Crédito 6,5–9,5%; Serviços 4–6%; Despesas 6–8%; Seguros 6–8%",
+    guidance: "Crédito 4–8%; MFL R$37–41bi; Serviços 4–8%; Despesas 5–9%; Seguros 6–10%",
     percepcao_mercado: "Trimestre de virada: lucro +39% YoY confirma turnaround. Carteira trilhão marca simbólica. ROAE de 14,4% ainda abaixo do custo de capital mas trajetória ascendente é consistente. SME liderando crescimento com NPL em queda.",
     mudancas_atendimento: "Lançamento Bradesco Principal (novo segmento afluente); App Empresas & Negócios com jornada MEI; BIA GenAI com 100% dos primeiros atendimentos via IA; Bradesco Expresso em 100% dos municípios brasileiros"
   },
@@ -130,10 +269,10 @@ window.QUARTERS_DATA = [
       clientes_pme_mil:    null,
       clientes_total_mm:   null,
       carteira_mpme_bi:    null,
-      npl_mpme_90_pct:     4.3,          // gráfico NPL 2T25 PDF (Jun25 MPME)
+      npl_mpme_90_pct:     4.1,          // Apresentação 1T26 p.6 (Jun25)
       npl_mpme_15_pct:     null,
       tpv_cartoes_bi:      null,
-      receitas_bi:         34.0,
+      receitas_bi:         34.1,         // Apresentação 1T26 p.3
       lucro_bi:            6.1,
       roae_pct:            14.6,
       eficiencia_pct:      null,
@@ -160,10 +299,10 @@ window.QUARTERS_DATA = [
       clientes_pme_mil:    null,
       clientes_total_mm:   null,
       carteira_mpme_bi:    null,
-      npl_mpme_90_pct:     3.7,          // gráfico NPL 3T25 PDF (Set25 MPME) — mínimo da série
+      npl_mpme_90_pct:     3.7,          // Apresentação 1T26 p.6 (Set25) — mínimo da série
       npl_mpme_15_pct:     null,
       tpv_cartoes_bi:      null,
-      receitas_bi:         35.0,
+      receitas_bi:         35.1,         // Apresentação 1T26 p.3
       lucro_bi:            6.2,
       roae_pct:            14.7,
       eficiencia_pct:      null,
@@ -190,10 +329,10 @@ window.QUARTERS_DATA = [
       clientes_pme_mil:    null,
       clientes_total_mm:   null,
       carteira_mpme_bi:    248.9,        // estimado: 254.6 / 1.023 (QoQ +2,3% declarado no 1T26)
-      npl_mpme_90_pct:     3.8,          // gráfico NPL 4T25 PDF (Dez25 MPME)
-      npl_mpme_15_pct:     null,
+      npl_mpme_90_pct:     3.8,          // Apresentação 1T26 p.6 (Dez25)
+      npl_mpme_15_pct:     3.45,         // Apresentação 1T26 p.6 nota (1): "3,45% em Dez25"
       tpv_cartoes_bi:      null,
-      receitas_bi:         36.1,
+      receitas_bi:         36.1,         // Apresentação 1T26 p.3
       lucro_bi:            6.5,
       roae_pct:            15.2,
       eficiencia_pct:      null,
@@ -220,8 +359,8 @@ window.QUARTERS_DATA = [
       clientes_pme_mil:    null,
       clientes_total_mm:   74.3,
       carteira_mpme_bi:    254.6,
-      npl_mpme_90_pct:     4.0,
-      npl_mpme_15_pct:     null,
+      npl_mpme_90_pct:     4.0,          // Apresentação 1T26 p.6 (Mar26)
+      npl_mpme_15_pct:     3.66,         // Apresentação 1T26 p.6 nota (1): "3,66% em Mar26"
       tpv_cartoes_bi:      95.1,
       receitas_bi:         36.9,
       lucro_bi:            6.8,
