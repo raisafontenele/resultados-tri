@@ -6,7 +6,9 @@
 <title>Resultados Tri — Competitive Intelligence</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="data/quarters.js"></script>
+<script src="data/quarters_sicredi.js"></script>
 <script src="data/timeline.js"></script>
+<script src="data/timeline_sicredi.js"></script>
 <style>
   :root {
     --bg: #0f1117;
@@ -18,6 +20,7 @@
     --accent-bradesco: #cc0000;
     --accent-sicredi: #007b3e;
     --accent-pagbank: #f7931a;
+    --accent: #cc0000;
     --up: #22c55e;
     --down: #ef4444;
     --neutral: #8891a8;
@@ -48,7 +51,7 @@
   .card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--text-muted); margin-bottom: 10px; }
 
   /* ── PERIOD BADGE ── */
-  .period-badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; background: rgba(204,0,0,.15); color: var(--accent-bradesco); margin-bottom: 12px; }
+  .period-badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; background: color-mix(in srgb, var(--accent) 15%, transparent); color: var(--accent); margin-bottom: 12px; }
 
   /* ── KPI GRID ── */
   .kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
@@ -65,7 +68,7 @@
   .highlight-list { list-style: none; }
   .highlight-list li { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; line-height: 1.5; display: flex; gap: 8px; }
   .highlight-list li:last-child { border-bottom: none; }
-  .highlight-list li::before { content: '›'; color: var(--accent-bradesco); font-weight: 700; flex-shrink: 0; }
+  .highlight-list li::before { content: '›'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
 
   /* ── PERCEPTION / GUIDANCE ── */
   .text-block { font-size: 13px; line-height: 1.6; color: var(--text); }
@@ -75,7 +78,7 @@
   .kpi-selector { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 14px; scrollbar-width: none; }
   .kpi-selector::-webkit-scrollbar { display: none; }
   .kpi-chip { flex-shrink: 0; padding: 5px 12px; border-radius: 16px; border: 1px solid var(--border); background: transparent; color: var(--text-muted); font-size: 12px; cursor: pointer; transition: all .2s; }
-  .kpi-chip.active { background: var(--accent-bradesco); border-color: var(--accent-bradesco); color: #fff; }
+  .kpi-chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
   .chart-wrap { position: relative; height: 220px; margin-bottom: 16px; }
 
   /* ── TABELA ── */
@@ -91,13 +94,13 @@
   .filters { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 14px; scrollbar-width: none; }
   .filters::-webkit-scrollbar { display: none; }
   .filter-chip { flex-shrink: 0; padding: 5px 10px; border-radius: 14px; border: 1px solid var(--border); background: transparent; color: var(--text-muted); font-size: 11px; cursor: pointer; }
-  .filter-chip.active { border-color: var(--accent-bradesco); color: var(--accent-bradesco); background: rgba(204,0,0,.1); }
+  .filter-chip.active { border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
 
   .timeline-track { position: relative; padding-left: 28px; }
   .timeline-track::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: var(--border); }
   .tl-item { position: relative; margin-bottom: 16px; }
-  .tl-dot { position: absolute; left: -22px; top: 6px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--accent-bradesco); background: var(--bg); }
-  .tl-dot.alto   { background: var(--accent-bradesco); }
+  .tl-dot { position: absolute; left: -22px; top: 6px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--accent); background: var(--bg); }
+  .tl-dot.alto   { background: var(--accent); }
   .tl-dot.médio  { background: var(--surface2); border-color: var(--accent-bradesco); }
   .tl-dot.baixo  { background: var(--surface2); border-color: var(--border); }
   .tl-header { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px; }
@@ -106,7 +109,7 @@
   .tl-title { font-size: 13px; font-weight: 600; line-height: 1.4; margin-bottom: 4px; }
   .tl-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; display: none; }
   .tl-desc.open { display: block; }
-  .tl-toggle { font-size: 11px; color: var(--accent-bradesco); cursor: pointer; margin-top: 4px; }
+  .tl-toggle { font-size: 11px; color: var(--accent); cursor: pointer; margin-top: 4px; }
   .impacto-badge { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 4px; }
   .impacto-badge.alto   { background: rgba(204,0,0,.15); color: var(--accent-bradesco); }
   .impacto-badge.médio  { background: rgba(136,145,168,.15); color: var(--text-muted); }
@@ -169,6 +172,7 @@ const BANK_CONFIG = {
     tipo: "incumbente",
     cor: "var(--accent-bradesco)",
     hex: "#cc0000",
+    priorityKpis: ["lucro_bi","roae_pct","carteira_mpme_bi","npl_mpme_90_pct","npl_mpme_15_pct","eficiencia_pct"],
     kpis: [
       { key: "lucro_bi",          label: "Lucro",           fmt: v => `R$${(+v).toFixed(1)}bi`, lowerBetter: false },
       { key: "roae_pct",          label: "ROAE",            fmt: v => `${v}%`,                  lowerBetter: false },
@@ -180,6 +184,24 @@ const BANK_CONFIG = {
       { key: "depositos_bi",      label: "Depósitos",       fmt: v => `R$${(+v).toFixed(1)}bi`, lowerBetter: false },
       { key: "clientes_total_mm", label: "Clientes Total",  fmt: v => `${v}MM`,                 lowerBetter: false },
       { key: "clientes_pme_mil",  label: "Clientes PME",    fmt: v => `${v}k`,                  lowerBetter: false },
+    ]
+  },
+  sicredi: {
+    label: "Sicredi",
+    tipo: "cooperativa",
+    cor: "var(--accent-sicredi)",
+    hex: "#007b3e",
+    priorityKpis: ["sobras_bi","roe_pct","carteira_bi","carteira_pj_bi","npl_total_pct","npl_pj_pct"],
+    kpis: [
+      { key: "sobras_bi",      label: "Sobras",          fmt: v => `R$${(+v).toFixed(2)}bi`, lowerBetter: false },
+      { key: "roe_pct",        label: "ROAE",            fmt: v => `${v}%`,                  lowerBetter: false },
+      { key: "carteira_bi",    label: "Carteira Total",  fmt: v => `R$${(+v).toFixed(1)}bi`, lowerBetter: false },
+      { key: "carteira_pj_bi", label: "Carteira PJ",     fmt: v => `R$${(+v).toFixed(1)}bi`, lowerBetter: false },
+      { key: "carteira_agro_bi",label:"Carteira Agro",   fmt: v => `R$${(+v).toFixed(1)}bi`, lowerBetter: false },
+      { key: "npl_total_pct",  label: "NPL Total 90",    fmt: v => `${v}%`,                  lowerBetter: true  },
+      { key: "npl_pj_pct",     label: "NPL PJ 90",       fmt: v => `${v}%`,                  lowerBetter: true  },
+      { key: "depositos_bi",   label: "Depósitos",       fmt: v => `R$${(+v).toFixed(1)}bi`, lowerBetter: false },
+      { key: "cooperados_mm",  label: "Cooperados",      fmt: v => `${v}MM`,                 lowerBetter: false },
     ]
   }
 };
@@ -193,11 +215,13 @@ let evolChart   = null;
 
 // ── HELPERS ──────────────────────────────────────────────
 function getBankData(bank) {
-  return (window.QUARTERS_DATA || []).filter(q => q.banco_id === bank)
+  const all = [...(window.QUARTERS_DATA||[]), ...(window.QUARTERS_DATA_SICREDI||[])];
+  return all.filter(q => q.banco_id === bank)
     .sort((a,b) => a.ano*10+a.tri - (b.ano*10+b.tri));
 }
 function getTimelineData(bank) {
-  return (window.TIMELINE_DATA || []).filter(t => t.banco_id === bank)
+  const all = [...(window.TIMELINE_DATA||[]), ...(window.TIMELINE_DATA_SICREDI||[])];
+  return all.filter(t => t.banco_id === bank)
     .sort((a,b) => a.data.localeCompare(b.data));
 }
 function fmt(bank, key, val) {
@@ -221,6 +245,7 @@ function sign(v) { return v > 0 ? "+" : ""; }
 
 // ── INIT ──────────────────────────────────────────────────
 function init() {
+  setAccent(currentBank);
   renderBankChips();
   renderTrimestre();
   renderEvolucao();
@@ -236,15 +261,21 @@ function init() {
 }
 
 // ── BANK CHIPS ────────────────────────────────────────────
+function setAccent(bank) {
+  const hex = BANK_CONFIG[bank]?.hex || "#888";
+  document.documentElement.style.setProperty("--accent", hex);
+}
+
 function renderBankChips() {
   const el = document.getElementById("bankChips");
   el.innerHTML = "";
-  const banks = [...new Set((window.QUARTERS_DATA||[]).map(q => q.banco_id))];
+  const allData = [...(window.QUARTERS_DATA||[]), ...(window.QUARTERS_DATA_SICREDI||[])];
+  const banks = [...new Set(allData.map(q => q.banco_id))];
   banks.forEach(b => {
     const c = document.createElement("div");
     c.className = "chip-bank" + (b === currentBank ? ` active-${b}` : "");
     c.textContent = BANK_CONFIG[b]?.label || b;
-    c.onclick = () => { currentBank = b; renderBankChips(); renderTrimestre(); renderEvolucao(); renderEstrategia(); };
+    c.onclick = () => { currentBank = b; setAccent(b); renderBankChips(); renderTrimestre(); renderEvolucao(); renderEstrategia(); };
     el.appendChild(c);
   });
 }
@@ -261,7 +292,7 @@ function renderTrimestre() {
   if (!cur) { document.getElementById("trimestre-content").innerHTML = '<div class="empty-state">Sem dados disponíveis.</div>'; return; }
 
   // KPIs prioritários sempre visíveis no topo (se tiverem valor)
-  const PRIORITY_KEYS = ["lucro_bi","roae_pct","carteira_mpme_bi","npl_mpme_90_pct","npl_mpme_15_pct","eficiencia_pct"];
+  const PRIORITY_KEYS = cfg.priorityKpis || ["lucro_bi","roae_pct","carteira_mpme_bi","npl_mpme_90_pct","npl_mpme_15_pct","eficiencia_pct"];
   const kpisToShow = cfg.kpis.filter(k => PRIORITY_KEYS.includes(k.key) && cur.kpis[k.key] != null);
   const kpiCardsHTML = kpisToShow.map(k => {
     const val  = cur.kpis[k.key];
