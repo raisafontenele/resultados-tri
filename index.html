@@ -7,8 +7,10 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="data/quarters.js"></script>
 <script src="data/quarters_sicredi.js"></script>
+<script src="data/quarters_pagbank.js"></script>
 <script src="data/timeline.js"></script>
 <script src="data/timeline_sicredi.js"></script>
+<script src="data/timeline_pagbank.js"></script>
 <style>
   :root {
     --bg: #0f1117;
@@ -186,6 +188,25 @@ const BANK_CONFIG = {
       { key: "clientes_pme_mil",  label: "Clientes PME",    fmt: v => `${v}k`,                  lowerBetter: false },
     ]
   },
+  pagbank: {
+    label: "PagBank",
+    tipo: "fintech",
+    cor: "var(--accent-pagbank)",
+    hex: "#f7931a",
+    priorityKpis: ["lucro_bi","roe_pct","receitas_bi","tpv_bi","carteira_bi","npl_90_pct"],
+    kpis: [
+      { key: "lucro_bi",        label: "Lucro",           fmt: v => `R$${(+v).toFixed(2)}bi`, lowerBetter: false },
+      { key: "roe_pct",         label: "ROAE",            fmt: v => `${v}%`,                  lowerBetter: false },
+      { key: "receitas_bi",     label: "Receitas",        fmt: v => `R$${(+v).toFixed(1)}bi`, lowerBetter: false },
+      { key: "tpv_bi",          label: "TPV",             fmt: v => `R$${(+v).toFixed(0)}bi`, lowerBetter: false },
+      { key: "tpv_msmb_bi",     label: "TPV MSMB",        fmt: v => `R$${(+v).toFixed(0)}bi`, lowerBetter: false },
+      { key: "carteira_bi",     label: "Carteira Crédito",fmt: v => `R$${(+v).toFixed(1)}bi`, lowerBetter: false },
+      { key: "npl_90_pct",      label: "NPL 90",          fmt: v => `${v}%`,                  lowerBetter: true  },
+      { key: "merchants_mm",    label: "Lojistas Ativos", fmt: v => `${v}MM`,                 lowerBetter: false },
+      { key: "contas_mm",       label: "Contas Ativas",   fmt: v => `${v}MM`,                 lowerBetter: false },
+      { key: "take_rate_pct",   label: "Take Rate",       fmt: v => `${v}%`,                  lowerBetter: false },
+    ]
+  },
   sicredi: {
     label: "Sicredi",
     tipo: "cooperativa",
@@ -215,12 +236,12 @@ let evolChart   = null;
 
 // ── HELPERS ──────────────────────────────────────────────
 function getBankData(bank) {
-  const all = [...(window.QUARTERS_DATA||[]), ...(window.QUARTERS_DATA_SICREDI||[])];
+  const all = [...(window.QUARTERS_DATA||[]), ...(window.QUARTERS_DATA_SICREDI||[]), ...(window.QUARTERS_DATA_PAGBANK||[])];
   return all.filter(q => q.banco_id === bank)
     .sort((a,b) => a.ano*10+a.tri - (b.ano*10+b.tri));
 }
 function getTimelineData(bank) {
-  const all = [...(window.TIMELINE_DATA||[]), ...(window.TIMELINE_DATA_SICREDI||[])];
+  const all = [...(window.TIMELINE_DATA||[]), ...(window.TIMELINE_DATA_SICREDI||[]), ...(window.TIMELINE_DATA_PAGBANK||[])];
   return all.filter(t => t.banco_id === bank)
     .sort((a,b) => a.data.localeCompare(b.data));
 }
@@ -269,7 +290,7 @@ function setAccent(bank) {
 function renderBankChips() {
   const el = document.getElementById("bankChips");
   el.innerHTML = "";
-  const allData = [...(window.QUARTERS_DATA||[]), ...(window.QUARTERS_DATA_SICREDI||[])];
+  const allData = [...(window.QUARTERS_DATA||[]), ...(window.QUARTERS_DATA_SICREDI||[]), ...(window.QUARTERS_DATA_PAGBANK||[])];
   const banks = [...new Set(allData.map(q => q.banco_id))];
   banks.forEach(b => {
     const c = document.createElement("div");
