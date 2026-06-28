@@ -107,9 +107,9 @@ window.QUARTERS_DATA_PAGBANK = [
       roe_pct:       14.2,
       receitas_bi:   4.850,
       tpv_bi:        129.2,
-      tpv_msmb_bi:   95.2,   // threshold novo: TPV ≤ R$3MM/mês (não comparável com trimestres anteriores)
+      tpv_msmb_bi:   95.2,
       carteira_bi:   3.7,
-      npl_90_pct:    null,
+      npl_90_pct:    2.3,    // retroativo via tabela Q2 2025 ER
       merchants_mm:  6.3,
       contas_mm:     17.7,
       take_rate_pct: 1.45,
@@ -133,7 +133,7 @@ window.QUARTERS_DATA_PAGBANK = [
       tpv_bi:        129.6,
       tpv_msmb_bi:   93.7,
       carteira_bi:   3.9,
-      npl_90_pct:    2.5,    // primeira divulgação de NPL >90d
+      npl_90_pct:    2.5,
       merchants_mm:  6.2,
       contas_mm:     17.7,
       take_rate_pct: 1.50,
@@ -146,55 +146,80 @@ window.QUARTERS_DATA_PAGBANK = [
       "2º dividendo US$ 0,12/ação (pago ago/25); 3º programa de recompra lançado (US$ 200MM)"
     ],
     guidance:null,
-    percepcao_mercado:"Banking como motor de crescimento é o grande pivô estratégico. NPL de 2,5% surpreende positivamente — carteira de crédito mais saudável do que o mercado temia. Base de lojistas caindo levanta questão sobre saturação do mercado de adquirência.",
+    percepcao_mercado:"Banking como motor de crescimento é o grande pivô estratégico. NPL de 2,5% surpreende positivamente. Base de lojistas caindo levanta questão sobre saturação do mercado de adquirência.",
     mudancas_atendimento:"Capital de giro sem garantia acelerado; working capital loans para PMEs; Banking como vertical principal de crescimento"
   },
   {
     banco_id:"pagbank", periodo:"3T25", ano:2025, tri:3,
     kpis:{
-      lucro_bi:      null,
-      roe_pct:       null,
-      receitas_bi:   null,
-      tpv_bi:        null,
-      tpv_msmb_bi:   null,
-      carteira_bi:   null,
-      npl_90_pct:    null,
-      merchants_mm:  null,
-      contas_mm:     null,
-      take_rate_pct: null,
+      lucro_bi:      0.571,
+      roe_pct:       15.1,
+      receitas_bi:   5.105,
+      tpv_bi:        129.8,
+      tpv_msmb_bi:   null,  // não segregado neste release
+      carteira_bi:   4.2,
+      npl_90_pct:    2.6,
+      merchants_mm:  6.3,
+      contas_mm:     17.8,
+      take_rate_pct: 1.50,
     },
-    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:""
+    highlights:[
+      "Capital de giro sem garantia +116% a/a em volume; +157% q/q em originação",
+      "Banking GP +58,7% a/a — representa 27,8% do total; crescimento acelerado",
+      "Meta de longo prazo anunciada: carteira de R$ 25bi até 2029",
+      "R$ 1,4bi em dividendos extras anunciados para 2026 (2 pagamentos de US$0,12)"
+    ],
+    guidance:"Carteira crédito alvo R$25bi (2029); GP CAGR >10%; EPS CAGR >16%",
+    percepcao_mercado:"ROAE de 15,1% sobe com Banking. TPV estagnado em ~R$130bi levanta questão sobre teto de crescimento em adquirência. Crédito como alavanca principal de crescimento futuro — working capital acelerando.",
+    mudancas_atendimento:"Working capital loans acelerado; rollout de empréstimos para lojistas sem garantia; programa de capital: BIS ratio alvo 18-22%"
   },
   {
     banco_id:"pagbank", periodo:"4T25", ano:2025, tri:4,
     kpis:{
-      lucro_bi:      null,
-      roe_pct:       null,
-      receitas_bi:   null,
-      tpv_bi:        null,
+      lucro_bi:      0.678,  // non-GAAP; GAAP=0.502bi (impacto CSLL diferida R$142MM)
+      roe_pct:       18.4,   // ROAE non-GAAP; GAAP=13.6%
+      receitas_bi:   5.397,
+      tpv_bi:        142.4,
       tpv_msmb_bi:   null,
-      carteira_bi:   null,
-      npl_90_pct:    null,
-      merchants_mm:  null,
-      contas_mm:     null,
-      take_rate_pct: null,
+      carteira_bi:   4.6,
+      npl_90_pct:    2.9,
+      merchants_mm:  6.3,
+      contas_mm:     17.3,
+      take_rate_pct: 1.40,
     },
-    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:""
+    highlights:[
+      "Lucro non-GAAP +7,4% a/a — GAAP -16,2% por CSLL diferida R$142MM (Lei 224/2025)",
+      "TPV recupera +9,7% q/q (R$142,4bi) com normalização macro",
+      "Working capital loans +170% a/a; originação R$185MM (+26% q/q)",
+      "Banking GP +53,8% a/a — 26,4% do total"
+    ],
+    guidance:null,
+    percepcao_mercado:"Resultado GAAP distorcido por CSLL. Non-GAAP mostra operação saudável com lucro record de R$678MM. TPV se recupera no 4T — sazonalidade positiva. NPL de 2,9% ainda controlado dado mix mais arriscado.",
+    mudancas_atendimento:"Dois novos dividendos (ago/nov 2025); working capital rollout ampliado; ROAE non-GAAP de 18,4% é patamar recorde"
   },
   {
     banco_id:"pagbank", periodo:"1T26", ano:2026, tri:1,
     kpis:{
-      lucro_bi:      null,
-      roe_pct:       null,
-      receitas_bi:   null,
-      tpv_bi:        null,
+      lucro_bi:      0.575,
+      roe_pct:       15.8,   // ROAE non-GAAP; GAAP=15.0%
+      receitas_bi:   5.006,
+      tpv_bi:        128.2,
       tpv_msmb_bi:   null,
-      carteira_bi:   null,
-      npl_90_pct:    null,
-      merchants_mm:  null,
-      contas_mm:     null,
-      take_rate_pct: null,
+      carteira_bi:   5.0,
+      npl_90_pct:    3.05,
+      merchants_mm:  6.3,
+      contas_mm:     17.3,
+      take_rate_pct: 1.47,
     },
-    highlights:[], guidance:null, percepcao_mercado:"", mudancas_atendimento:""
+    highlights:[
+      "Banking GP atinge 31,2% do Gross Profit total — recorde histórico",
+      "Carteira crédito R$5,0bi (+35,9% a/a); working capital +190,6% a/a",
+      "NPL 3,05% — alta esperada com maior mix de crédito sem garantia; ainda abaixo de pares",
+      "Dividendo US$0,26/ação anunciado para jun/26 (total R$1,4bi em 2026)",
+      "BIS ratio managerial 24,1% — capital robusto para continuar crescendo em crédito"
+    ],
+    guidance:"Carteira crédito alvo R$25bi (2029); GP CAGR >10%; BIS ratio alvo 18-22%",
+    percepcao_mercado:"Banking como % do gross profit atingindo 31% confirma a transformação: PagBank está se tornando um banco de verdade para lojistas. NPL de 3,05% ainda saudável vs. peers. Desafio: TPV estagnado em R$128bi — crescimento de receita depende cada vez mais de crédito e banking, não de adquirência.",
+    mudancas_atendimento:"Consignado privado para PMEs em rollout; Banking como vertical #1 de crescimento; dividendo estrutural de US$0,26/ação; portfólio expandido R$51bi"
   },
 ];
