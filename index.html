@@ -8,9 +8,11 @@
 <script src="data/quarters.js"></script>
 <script src="data/quarters_sicredi.js"></script>
 <script src="data/quarters_pagbank.js"></script>
+<script src="data/quarters_meli.js"></script>
 <script src="data/timeline.js"></script>
 <script src="data/timeline_sicredi.js"></script>
 <script src="data/timeline_pagbank.js"></script>
+<script src="data/timeline_meli.js"></script>
 <style>
   :root {
     --bg: #0f1117;
@@ -22,6 +24,7 @@
     --accent-bradesco: #cc0000;
     --accent-sicredi: #007b3e;
     --accent-pagbank: #f7931a;
+    --accent-mercadopago: #00b1ea;
     --accent: #cc0000;
     --up: #22c55e;
     --down: #ef4444;
@@ -37,9 +40,10 @@
   .bank-chips { display: flex; gap: 8px; overflow-x: auto; padding: 12px 16px; scrollbar-width: none; }
   .bank-chips::-webkit-scrollbar { display: none; }
   .chip-bank { flex-shrink: 0; padding: 6px 14px; border-radius: 20px; border: 2px solid transparent; background: var(--surface2); color: var(--text-muted); font-size: 13px; font-weight: 600; cursor: pointer; transition: all .2s; }
-  .chip-bank.active-bradesco { border-color: var(--accent-bradesco); color: var(--accent-bradesco); background: rgba(204,0,0,.12); }
-  .chip-bank.active-sicredi  { border-color: var(--accent-sicredi);  color: var(--accent-sicredi);  background: rgba(0,123,62,.12); }
-  .chip-bank.active-pagbank  { border-color: var(--accent-pagbank);  color: var(--accent-pagbank);  background: rgba(247,147,26,.12); }
+  .chip-bank.active-bradesco    { border-color: var(--accent-bradesco);    color: var(--accent-bradesco);    background: rgba(204,0,0,.12); }
+  .chip-bank.active-sicredi     { border-color: var(--accent-sicredi);     color: var(--accent-sicredi);     background: rgba(0,123,62,.12); }
+  .chip-bank.active-pagbank     { border-color: var(--accent-pagbank);     color: var(--accent-pagbank);     background: rgba(247,147,26,.12); }
+  .chip-bank.active-mercadopago { border-color: var(--accent-mercadopago); color: var(--accent-mercadopago); background: rgba(0,177,234,.12); }
 
   /* ── TABS ── */
   .tab-bar { display: flex; border-bottom: 1px solid var(--border); }
@@ -224,6 +228,28 @@ const BANK_CONFIG = {
       { key: "depositos_bi",   label: "Depósitos",       fmt: v => `R$${(+v).toFixed(1)}bi`, lowerBetter: false },
       { key: "cooperados_mm",  label: "Cooperados",      fmt: v => `${v}MM`,                 lowerBetter: false },
     ]
+  },
+  mercadopago: {
+    label: "Mercado Pago",
+    tipo: "fintech",
+    cor: "var(--accent-mercadopago)",
+    hex: "#00b1ea",
+    priorityKpis: ["mau_mm","credit_usd_bi","tpv_usd_bi","npl_90_pct","receita_usd_bi","aum_usd_bi"],
+    kpis: [
+      { key: "receita_usd_bi",    label: "Receita (Global)",        fmt: v => `US$${(+v).toFixed(1)}bi`, lowerBetter: false },
+      { key: "netincome_usd_mm",  label: "Lucro Líquido (Global)",  fmt: v => `US$${(+v).toFixed(0)}mn`, lowerBetter: false },
+      { key: "ifo_usd_mm",        label: "IFO (Global)",            fmt: v => `US$${(+v).toFixed(0)}mn`, lowerBetter: false },
+      { key: "ifo_margin_pct",    label: "Margem IFO",              fmt: v => `${v}%`,                   lowerBetter: false },
+      { key: "gmv_usd_bi",        label: "GMV Total (Global)",      fmt: v => `US$${(+v).toFixed(1)}bi`, lowerBetter: false },
+      { key: "credit_usd_bi",     label: "Carteira Crédito (MP)",   fmt: v => `US$${(+v).toFixed(1)}bi`, lowerBetter: false },
+      { key: "mau_mm",            label: "Fintech MAU (MP)",        fmt: v => `${(+v).toFixed(0)}MM`,    lowerBetter: false },
+      { key: "aum_usd_bi",        label: "AUM (MP)",                fmt: v => `US$${(+v).toFixed(1)}bi`, lowerBetter: false },
+      { key: "tpv_usd_bi",        label: "Acquiring TPV (Global)",  fmt: v => `US$${(+v).toFixed(0)}bi`, lowerBetter: false },
+      { key: "npl_90_pct",        label: "NPL >90d (MP)",           fmt: v => `${v}%`,                   lowerBetter: true  },
+      { key: "npl_1590_pct",      label: "NPL 15-90d (MP)",         fmt: v => `${v}%`,                   lowerBetter: true  },
+      { key: "nimal_pct",         label: "NIMAL (MP)",              fmt: v => `${v}%`,                   lowerBetter: false },
+      { key: "receita_br_usd_bi", label: "Receita Brasil (BR)",     fmt: v => `US$${(+v).toFixed(2)}bi`, lowerBetter: false },
+    ]
   }
 };
 
@@ -236,12 +262,12 @@ let evolChart   = null;
 
 // ── HELPERS ──────────────────────────────────────────────
 function getBankData(bank) {
-  const all = [...(window.QUARTERS_DATA||[]), ...(window.QUARTERS_DATA_SICREDI||[]), ...(window.QUARTERS_DATA_PAGBANK||[])];
+  const all = [...(window.QUARTERS_DATA||[]), ...(window.QUARTERS_DATA_SICREDI||[]), ...(window.QUARTERS_DATA_PAGBANK||[]), ...(window.QUARTERS_DATA_MELI||[])];
   return all.filter(q => q.banco_id === bank)
     .sort((a,b) => a.ano*10+a.tri - (b.ano*10+b.tri));
 }
 function getTimelineData(bank) {
-  const all = [...(window.TIMELINE_DATA||[]), ...(window.TIMELINE_DATA_SICREDI||[]), ...(window.TIMELINE_DATA_PAGBANK||[])];
+  const all = [...(window.TIMELINE_DATA||[]), ...(window.TIMELINE_DATA_SICREDI||[]), ...(window.TIMELINE_DATA_PAGBANK||[]), ...(window.TIMELINE_DATA_MELI||[])];
   return all.filter(t => t.banco_id === bank)
     .sort((a,b) => a.data.localeCompare(b.data));
 }
@@ -290,7 +316,7 @@ function setAccent(bank) {
 function renderBankChips() {
   const el = document.getElementById("bankChips");
   el.innerHTML = "";
-  const allData = [...(window.QUARTERS_DATA||[]), ...(window.QUARTERS_DATA_SICREDI||[]), ...(window.QUARTERS_DATA_PAGBANK||[])];
+  const allData = [...(window.QUARTERS_DATA||[]), ...(window.QUARTERS_DATA_SICREDI||[]), ...(window.QUARTERS_DATA_PAGBANK||[]), ...(window.QUARTERS_DATA_MELI||[])];
   const banks = [...new Set(allData.map(q => q.banco_id))];
   banks.forEach(b => {
     const c = document.createElement("div");
