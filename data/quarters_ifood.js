@@ -33,7 +33,11 @@ window.QUARTERS_DATA_IFOOD = [
       pedidos_mes_mm:       100,    // aprox. out/23–dez/23 ~89-100MM/mês (Clube presentation)
       compradores_mm:       20,     // Clube presentation end of 2023: 20MM buyers
       pago_receita_usd_mm:  127,    // FY25 booklet: "from US$127m in FY24"
+      pago_aebitda_usd_mm:  null,   // não divulgado separadamente para FY24
+      pago_aebit_usd_mm:    null,   // não divulgado separadamente para FY24
       pago_aum_usd_mm:      574,    // FY25 booklet: "AuM from US$574m to US$921m"
+      pago_aum_b2b_brl_bi:  null,   // não divulgado separadamente para FY24
+      zoop_receita_brl_bi:  null,   // Zoop adquirida em FY25; receita não divulgada separadamente em FY24
       gmv_crescimento_pct:  null,   // não divulgado separadamente para FY24
       categorias_gmv_pct:   null,
       ads_gmv_pct:          0.2,    // deep dive: cresceu de 0.2% para 0.9% (FY24→FY26 início)
@@ -62,7 +66,11 @@ window.QUARTERS_DATA_IFOOD = [
       pedidos_mes_mm:       120,    // FY25 booklet: "over 120 million orders in March 2025"
       compradores_mm:       25,     // FY25 booklet: "monthly unique buyers rose to 25 million"
       pago_receita_usd_mm:  145,    // FY25 booklet: "US$145m (from US$127m in FY24)"
-      pago_aum_usd_mm:      921,    // FY25 booklet: "AuM from US$574m to US$921m"
+      pago_aebitda_usd_mm:  null,   // não divulgado separadamente para FY25
+      pago_aebit_usd_mm:    -6,     // FY25 booklet: "aEBIT of -US$6m" — ainda em modo investimento
+      pago_aum_usd_mm:      921,    // FY25 booklet: "AuM from US$574m to US$921m" (B2B crédito)
+      pago_aum_b2b_brl_bi:  null,   // valor em BRL não divulgado explicitamente para FY25
+      zoop_receita_brl_bi:  null,   // receita Zoop não divulgada separadamente para FY25
       gmv_crescimento_pct:  32,     // FY25 booklet: "GMV grew 32%"
       categorias_gmv_pct:   null,   // não desagregado
       ads_gmv_pct:          0.9,    // deep dive: cresceu para 0.9% de GMV em FY25
@@ -92,7 +100,11 @@ window.QUARTERS_DATA_IFOOD = [
       pedidos_mes_mm:       175,    // FY26 booklet: "175 million orders/month" em março 2026
       compradores_mm:       null,   // não divulgado explicitamente para FY26
       pago_receita_usd_mm:  463,    // FY26 booklet: "revenue by 219% (93%) to US$463m"
-      pago_aum_usd_mm:      null,   // BRL1.8bn (crédito B2B apenas); US$ não divulgado diretamente
+      pago_aebitda_usd_mm:  38,     // FY26 booklet: "aEBITDA of US$38m" — virada para breakeven
+      pago_aebit_usd_mm:    null,   // aEBIT não divulgado separadamente para FY26
+      pago_aum_usd_mm:      null,   // AUM total não divulgado em USD para FY26
+      pago_aum_b2b_brl_bi:  1.8,   // FY26 booklet: "Credit B2B AUM BRL1.8bn (+91% a/a)" — crédito a restaurantes
+      zoop_receita_brl_bi:  1.0,   // FY26 booklet: "Zoop surpassing BRL1bn in revenue for the year" — receita anual
       gmv_crescimento_pct:  12,     // FY26 booklet: "GMV growth of 17% (12% LC ex-M&A)"
       categorias_gmv_pct:   47,     // FY26 booklet: "GMV grew by 47%" (grocery+pharma+convenience)
       ads_gmv_pct:          1.7,    // deep dive: "1.7% of GMV" em FY26
