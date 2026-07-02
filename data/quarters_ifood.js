@@ -36,7 +36,7 @@ window.QUARTERS_DATA_IFOOD = [
       pago_aebitda_usd_mm:  null,   // não divulgado separadamente para FY24
       pago_aebit_usd_mm:    null,   // não divulgado separadamente para FY24
       pago_aum_usd_mm:      574,    // FY25 booklet: "AuM from US$574m to US$921m"
-      pago_aum_b2b_brl_bi:  null,   // não divulgado separadamente para FY24
+      pago_aum_b2b_brl_bi:  0.61254, // crédito B2B fim de 2024: BRL 612,54MM
       zoop_receita_brl_bi:  null,   // Zoop adquirida em FY25; receita não divulgada separadamente em FY24
       gmv_crescimento_pct:  null,   // não divulgado separadamente para FY24
       categorias_gmv_pct:   null,
@@ -69,7 +69,7 @@ window.QUARTERS_DATA_IFOOD = [
       pago_aebitda_usd_mm:  null,   // não divulgado separadamente para FY25
       pago_aebit_usd_mm:    -6,     // FY25 booklet: "aEBIT of -US$6m" — ainda em modo investimento
       pago_aum_usd_mm:      921,    // FY25 booklet: "AuM from US$574m to US$921m" (B2B crédito)
-      pago_aum_b2b_brl_bi:  null,   // valor em BRL não divulgado explicitamente para FY25
+      pago_aum_b2b_brl_bi:  0.865,  // crédito B2B fim de 2025: BRL 865MM
       zoop_receita_brl_bi:  null,   // receita Zoop não divulgada separadamente para FY25
       gmv_crescimento_pct:  32,     // FY25 booklet: "GMV grew 32%"
       categorias_gmv_pct:   null,   // não desagregado
