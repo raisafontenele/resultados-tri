@@ -9,10 +9,12 @@
 <script src="data/quarters_sicredi.js"></script>
 <script src="data/quarters_pagbank.js"></script>
 <script src="data/quarters_meli.js"></script>
+<script src="data/quarters_ifood.js"></script>
 <script src="data/timeline.js"></script>
 <script src="data/timeline_sicredi.js"></script>
 <script src="data/timeline_pagbank.js"></script>
 <script src="data/timeline_meli.js"></script>
+<script src="data/timeline_ifood.js"></script>
 <style>
   :root {
     --bg: #0f1117;
@@ -25,6 +27,7 @@
     --accent-sicredi: #007b3e;
     --accent-pagbank: #f7931a;
     --accent-mercadopago: #00b1ea;
+    --accent-ifood: #EA1D2C;
     --accent: #cc0000;
     --up: #22c55e;
     --down: #ef4444;
@@ -44,6 +47,7 @@
   .chip-bank.active-sicredi     { border-color: var(--accent-sicredi);     color: var(--accent-sicredi);     background: rgba(0,123,62,.12); }
   .chip-bank.active-pagbank     { border-color: var(--accent-pagbank);     color: var(--accent-pagbank);     background: rgba(247,147,26,.12); }
   .chip-bank.active-mercadopago { border-color: var(--accent-mercadopago); color: var(--accent-mercadopago); background: rgba(0,177,234,.12); }
+  .chip-bank.active-ifood       { border-color: var(--accent-ifood);       color: var(--accent-ifood);       background: rgba(234,29,44,.12); }
 
   /* ── TABS ── */
   .tab-bar { display: flex; border-bottom: 1px solid var(--border); }
@@ -250,6 +254,26 @@ const BANK_CONFIG = {
       { key: "nimal_pct",         label: "NIMAL (MP)",              fmt: v => `${v}%`,                   lowerBetter: false },
       { key: "receita_br_usd_bi", label: "Receita Brasil (BR)",     fmt: v => `US$${(+v).toFixed(2)}bi`, lowerBetter: false },
     ]
+  },
+  ifood: {
+    label: "iFood",
+    tipo: "plataforma",
+    cor: "var(--accent-ifood)",
+    hex: "#EA1D2C",
+    priorityKpis: ["pedidos_mes_mm","receita_usd_bi","aebitda_usd_mm","pago_receita_usd_mm","pago_aum_usd_mm","compradores_mm"],
+    kpis: [
+      { key: "receita_usd_bi",       label: "Receita Total (USD)",       fmt: v => `US$${(+v).toFixed(1)}bi`, lowerBetter: false },
+      { key: "aebitda_usd_mm",       label: "aEBITDA",                   fmt: v => `US$${(+v).toFixed(0)}mn`, lowerBetter: false },
+      { key: "aebit_usd_mm",         label: "aEBIT",                     fmt: v => `US$${(+v).toFixed(0)}mn`, lowerBetter: false },
+      { key: "pedidos_bi",           label: "Pedidos Anuais",            fmt: v => `${(+v).toFixed(2)}bi`,    lowerBetter: false },
+      { key: "pedidos_mes_mm",       label: "Pedidos/Mês (mar)",         fmt: v => `${(+v).toFixed(0)}MM`,    lowerBetter: false },
+      { key: "compradores_mm",       label: "Compradores Únicos/Mês",    fmt: v => `${(+v).toFixed(0)}MM`,    lowerBetter: false },
+      { key: "pago_receita_usd_mm",  label: "iFood Pago Receita",        fmt: v => `US$${(+v).toFixed(0)}mn`, lowerBetter: false },
+      { key: "pago_aum_usd_mm",      label: "iFood Pago AUM (B2B)",      fmt: v => `US$${(+v).toFixed(0)}mn`, lowerBetter: false },
+      { key: "gmv_crescimento_pct",  label: "Crescimento GMV (%LC)",     fmt: v => `${v}%`,                   lowerBetter: false },
+      { key: "categorias_gmv_pct",   label: "Categ. GMV (grocery+…)",   fmt: v => `${v}%`,                   lowerBetter: false },
+      { key: "ads_gmv_pct",          label: "Ads como % do GMV",         fmt: v => `${v}%`,                   lowerBetter: false },
+    ]
   }
 };
 
@@ -262,12 +286,12 @@ let evolChart   = null;
 
 // ── HELPERS ──────────────────────────────────────────────
 function getBankData(bank) {
-  const all = [...(window.QUARTERS_DATA||[]), ...(window.QUARTERS_DATA_SICREDI||[]), ...(window.QUARTERS_DATA_PAGBANK||[]), ...(window.QUARTERS_DATA_MELI||[])];
+  const all = [...(window.QUARTERS_DATA||[]), ...(window.QUARTERS_DATA_SICREDI||[]), ...(window.QUARTERS_DATA_PAGBANK||[]), ...(window.QUARTERS_DATA_MELI||[]), ...(window.QUARTERS_DATA_IFOOD||[])];
   return all.filter(q => q.banco_id === bank)
     .sort((a,b) => a.ano*10+a.tri - (b.ano*10+b.tri));
 }
 function getTimelineData(bank) {
-  const all = [...(window.TIMELINE_DATA||[]), ...(window.TIMELINE_DATA_SICREDI||[]), ...(window.TIMELINE_DATA_PAGBANK||[]), ...(window.TIMELINE_DATA_MELI||[])];
+  const all = [...(window.TIMELINE_DATA||[]), ...(window.TIMELINE_DATA_SICREDI||[]), ...(window.TIMELINE_DATA_PAGBANK||[]), ...(window.TIMELINE_DATA_MELI||[]), ...(window.TIMELINE_DATA_IFOOD||[])];
   return all.filter(t => t.banco_id === bank)
     .sort((a,b) => a.data.localeCompare(b.data));
 }
@@ -316,7 +340,7 @@ function setAccent(bank) {
 function renderBankChips() {
   const el = document.getElementById("bankChips");
   el.innerHTML = "";
-  const allData = [...(window.QUARTERS_DATA||[]), ...(window.QUARTERS_DATA_SICREDI||[]), ...(window.QUARTERS_DATA_PAGBANK||[]), ...(window.QUARTERS_DATA_MELI||[])];
+  const allData = [...(window.QUARTERS_DATA||[]), ...(window.QUARTERS_DATA_SICREDI||[]), ...(window.QUARTERS_DATA_PAGBANK||[]), ...(window.QUARTERS_DATA_MELI||[]), ...(window.QUARTERS_DATA_IFOOD||[])];
   const banks = [...new Set(allData.map(q => q.banco_id))];
   banks.forEach(b => {
     const c = document.createElement("div");
